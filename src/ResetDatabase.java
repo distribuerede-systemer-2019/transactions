@@ -38,15 +38,6 @@ public class ResetDatabase {
         return null;
     }
 
-    private static InputStreamReader getFile(String path) {
-        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(path))) {
-            return isr;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     private static void executeSql(String sqlFilePath) {
         try (InputStreamReader file = new InputStreamReader(new FileInputStream(sqlFilePath))) {
             ScriptRunner runner = new ScriptRunner(getConnection(true));
