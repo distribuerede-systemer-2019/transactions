@@ -83,8 +83,5 @@ public class ResetDatabase {
         String sqlFilePath = getWorkingDir() + "/src/sql.sql";
         executeSql(sqlFilePath);
         System.out.println("Sql script done!");
-
-        System.out.println(System.getenv("foo"));
-
     }
 }
