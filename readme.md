@@ -8,14 +8,14 @@ Vi anbefaler derfor at I hver har jeres egen udviklingsdatabase lokalt på jeres
 for at I alle i gruppen har denne samme tabel-struktur, for at kunne arbejde sammen på projektet. Netop
 dette skal vi kigge på hvordan man gør i dag!
 
-#### 1. Opgave - Hent dette repository
+### 1. Opgave - Hent dette repository
 1. Åbn din terminal og naviger hen til mappen hvor du ønsker dette projekt skal ligge (HINT: `cd` bruges til at skifte mappe)
 2. `git clone https://github.com/Distribuerede-Systemer-2017/db-utility.git`
 3. Åbn IntelliJ, lav et nyt projekt og placer projektet oven i dette repository
 4. Højreklik på `pom.xml` og tryk "Add as Maven Project".
 5. Du er færdig!
 
-#### 2. Opgave - Kør projektet
+### 2. Opgave - Kør projektet
 
 **OBS** - Før projektet kan køres, skal I have MySql installeret og kørende på jeres maskine (som vi satte op i første øvelsestime).
 
@@ -28,7 +28,7 @@ Hvis fejlen ligner det her, så gå videre til opg. 3:
 ```
 java.sql.SQLNonTransientConnectionException: Cannot load connection class because of underlying exception: com.mysql.cj.core.exceptions.WrongArgumentException: Failed to parse the host:port pair 'null:null'.
 ```
-#### 3. Opgave - Environment variables
+### 3. Opgave - Environment variables
 I `ResetDatabase`-klassen på linje 22, 23 og 24 kan I se at `System.getenv(...)` bliver kaldt og forventer
 at finde en variabel. Da disse ikke er sat på forhånd I jeres projekt, skal disse konfigureres inden systemet
 kan køre.
