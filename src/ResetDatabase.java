@@ -41,6 +41,7 @@ public class ResetDatabase {
             ScriptRunner runner = new ScriptRunner(getConnection(true));
             runner.runScript(file);
             runner.closeConnection();
+            file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
