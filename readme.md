@@ -20,7 +20,7 @@ dette skal vi kigge på hvordan man gør i dag!
 **OBS** - Før projektet kan køres, skal I have MySql installeret og kørende på jeres maskine (som vi satte op i første øvelsestime).
 
 1. I mappen `/src` højreklik på ResetDatabase
-2. Klik på `Run'Server.main()'`
+2. Klik på `Run'ResetDatabase.main()'`
 
 Får I nogle fejl? Hvilke?
 
