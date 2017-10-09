@@ -10,9 +10,9 @@ dette skal vi kigge på hvordan man gør i dag!
 
 #### 1. Opgave - Hent dette repository
 1. Åbn din terminal og naviger hen til mappen hvor du ønsker dette projekt skal ligge (HINT: `cd` bruges til at skifte mappe)
-2. `git clone https://github.com/Distribuerede-Systemer-2017/restfull-dis.git`
+2. `git clone https://github.com/Distribuerede-Systemer-2017/db-utility.git`
 3. Åbn IntelliJ, lav et nyt projekt og placer projektet oven i dette repository
-4. OBS: læg mærke til de to pop-up beskeder nederst til højre i vinduet: "Frameworks Detected" og "Non-managed pom.xml file found". I "Frameworks Detected" trykker I "configure" og trykker OK". I den næste trykker i på pilen, og trykker "Add as Maven Project".
+4. Højreklik på `pom.xml` og tryk "Add as Maven Project".
 5. Du er færdig!
 
 #### 2. Opgave - Kør projektet
