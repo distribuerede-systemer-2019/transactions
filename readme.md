@@ -30,7 +30,7 @@ java.sql.SQLNonTransientConnectionException: Cannot load connection class becaus
 ```
 #### 3. Opgave - Environment variables
 I `ResetDatabase`-klassen på linje 22, 23 og 24 kan I se at `System.getenv(...)` bliver kaldt og forventer
-at finde en variable. Da disse ikke er sat på forhånd I jeres projekt, skal disse konfigureres inden systemet
+at finde en variabel. Da disse ikke er sat på forhånd I jeres projekt, skal disse konfigureres inden systemet
 kan køre.
 
 1. Klik på "ResetDatabase" konfigurationen ved den grønne play-knap øverst til højre
