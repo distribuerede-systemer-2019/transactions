@@ -52,7 +52,7 @@ Hvis alt virker som det skal, så printes en masse tekst i konsollen og du kan n
 samt værdier der er blevet insat. Læg mærke til at det her sagtens kan lade sig gøre at køre `INSERT` statements, hvis I 
 vil have default indhold hver gang scriptet køres.
 
-#### 4. Opgave
+### 4. Opgave
 Scriptet er lavet således at det sletter, opretter og kører `sql.sql` filen hver gang programmet køres. Du kan derfor
 prøve at smide en masse indhold i databasen og så køre scriptet igen. Din database skulle nu gerne være rullet tilbage
 som den så ud da du begyndte.
