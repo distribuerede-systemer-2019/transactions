@@ -10,16 +10,27 @@ import java.sql.SQLException;
 
 public class ResetDatabase {
 
-    private static String getWorkingDir(){
+    private static String getWorkingDir() {
         return System.getProperty("user.dir");
     }
 
     private static Connection getConnection(Boolean useDefaultDb) {
         try {
-            if(useDefaultDb){
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/dis?useSSL=false&serverTimezone=GMT", "root", "root");
+            if (useDefaultDb) {
+                return DriverManager.getConnection(
+                        "jdbc:mysql://"
+                                + System.getenv("DATABASE_HOST") + ":"
+                                + System.getenv("DATABASE_PORT") + "/"
+                                + System.getenv("DATABASE_NAME") + "?useSSL=false&serverTimezone=GMT",
+                        System.getenv("DATABASE_USER"),
+                        System.getenv("DATABASE_PASSWORD"));
             } else {
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/?useSSL=false&serverTimezone=GMT", "root", "root");
+                return DriverManager.getConnection(
+                        "jdbc:mysql://"
+                                + System.getenv("DATABASE_HOST") + ":"
+                                + System.getenv("DATABASE_PORT") + "/?useSSL=false&serverTimezone=GMT",
+                        System.getenv("DATABASE_USER"),
+                        System.getenv("DATABASE_PASSWORD"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -28,7 +39,7 @@ public class ResetDatabase {
     }
 
     private static InputStreamReader getFile(String path) {
-        try(InputStreamReader isr = new InputStreamReader(new FileInputStream(path))){
+        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(path))) {
             return isr;
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,7 +48,7 @@ public class ResetDatabase {
     }
 
     private static void executeSql(String sqlFilePath) {
-        try(InputStreamReader file = new InputStreamReader(new FileInputStream(sqlFilePath))){
+        try (InputStreamReader file = new InputStreamReader(new FileInputStream(sqlFilePath))) {
             ScriptRunner runner = new ScriptRunner(getConnection(true));
             runner.runScript(file);
             runner.closeConnection();
@@ -47,18 +58,20 @@ public class ResetDatabase {
         }
     }
 
-    private static void deleteDatabase(){
+    private static void deleteDatabase() {
         try {
-            PreparedStatement deleteStatement = getConnection(false).prepareStatement("DROP database dis");
+            PreparedStatement deleteStatement = getConnection(false)
+                    .prepareStatement("DROP database " + System.getenv("DATABASE_NAME"));
             deleteStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static void createDatabase(){
+    private static void createDatabase() {
         try {
-            PreparedStatement createStatement = getConnection(false).prepareStatement("CREATE database dis");
+            PreparedStatement createStatement = getConnection(false)
+                    .prepareStatement("CREATE database " + System.getenv("DATABASE_NAME"));
             createStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,5 +92,8 @@ public class ResetDatabase {
         String sqlFilePath = getWorkingDir() + "/src/sql.sql";
         executeSql(sqlFilePath);
         System.out.println("Sql script done!");
+
+        System.out.println(System.getenv("foo"));
+
     }
 }
