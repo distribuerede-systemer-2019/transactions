@@ -39,9 +39,9 @@ kan køre.
 4. Klik på "+" nederst til venstre
 5. Opret og navngiv nu følgende variable og indsæt de værdier som passer til dit system: 
 ```
-DATABASE_HOST
+DATABASE_HOST (højst sandsynligt localhost)
 DATABASE_NAME (her vælger du)
-DATABASE_PORT
+DATABASE_PORT (højst sandsynligt 3306)
 DATABASE_USER
 DATABASE_PASSWORD
 ```
