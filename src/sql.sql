@@ -1,152 +1,77 @@
-CREATE DATABASE IF NOT EXISTS dis;
-USE dis;
+DROP DATABASE dis;
+CREATE DATABASE dis;
+Use dis;
 
-/* Create Tables */
-
-CREATE TABLE IF NOT EXISTS calendar
+CREATE TABLE IF NOT EXISTS students
 (
-  calendarid    INT          NOT NULL AUTO_INCREMENT,
-  name          VARCHAR(255) NOT NULL,
-  active        TINYINT,
-  createdby     VARCHAR(255) NOT NULL,
-  -- 1 = public
-  -- 2 = private
-  privatePublic TINYINT      NOT NULL
-  COMMENT '1 = public
-	2 = private',
-  PRIMARY KEY (calendarid)
-);
-
-
-CREATE TABLE IF NOT EXISTS dailyupdate
-(
-  date                DATETIME     NOT NULL UNIQUE,
-  apparentTemperature DOUBLE,
-  summary             TEXT,
-  qotd                VARCHAR(300) NOT NULL,
-  msg_type            VARCHAR(100) NOT NULL,
-  update_timestamp    TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
-  PRIMARY KEY (date)
-);
-
-
-CREATE TABLE IF NOT EXISTS events
-(
-  eventid     INT        NOT NULL AUTO_INCREMENT,
-  type        INT        NOT NULL,
-  location    INT,
-  createdby   INT        NOT NULL,
-  start       DATETIME   NOT NULL,
-  end         DATETIME   NOT NULL,
-  name        VARCHAR(0) NOT NULL,
-  text        TEXT       NOT NULL,
-  -- Decides wether the event is an import-event or user created
-  --
-  customevent BOOLEAN COMMENT 'Decides wether the event is an import-event or user created
-',
-  calendarid  INT        NOT NULL,
-  PRIMARY KEY (eventid)
-);
-
-
-CREATE TABLE IF NOT EXISTS locationdata
-(
-  locationdataid INT NOT NULL AUTO_INCREMENT,
-  longitude      INT NOT NULL,
-  latitude       INT UNIQUE,
-  PRIMARY KEY (locationdataid)
-);
-
-
-CREATE TABLE IF NOT EXISTS notes
-(
-  noteid    INT          NOT NULL AUTO_INCREMENT,
-  eventid   INT          NOT NULL,
-  createdby INT          NOT NULL,
-  text      TEXT,
-  dateTime  DATETIME     NOT NULL,
-  active    BIT,
-  PRIMARY KEY (noteid)
-);
-
-
-CREATE TABLE IF NOT EXISTS roles
-(
-  roleid INT          NOT NULL AUTO_INCREMENT,
-  userid INT          NOT NULL,
-  type   VARCHAR(200) NOT NULL,
-  PRIMARY KEY (roleid)
-);
-
-
-CREATE TABLE IF NOT EXISTS userevents
-(
-  userid     INT NOT NULL,
-  calendarid INT NOT NULL
-);
-
-
-CREATE TABLE IF NOT EXISTS users
-(
-  userid   INT          NOT NULL AUTO_INCREMENT,
+  studentid   INT          NOT NULL AUTO_INCREMENT,
   email    VARCHAR(40)  NOT NULL,
   active   BOOLEAN,
   created  DATETIME     NOT NULL DEFAULT NOW(),
   password VARCHAR(200) NOT NULL,
-  PRIMARY KEY (userid)
+  PRIMARY KEY (studentid)
 );
 
-/* Create Dummy Account */
+CREATE TABLE IF NOT EXISTS courses
+(
+  courseid	INT	NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255)	NOT NULL,
+  PRIMARY KEY (courseid)
+);
 
-INSERT INTO `dis`.`users`(`email`,`active`,`password`)
-VALUES ('admin@admin.dk', TRUE, 'd6YSr320JnLXlp8YYxUcNQ==');
+CREATE TABLE IF NOT EXISTS studentCourses
+(
+  studentcoursesid INT NOT NULL AUTO_INCREMENT,
+  courseid INT NOT NULL,
+  studentid INT NOT NULL,
+  PRIMARY KEY(studentcoursesid)
+);
 
-
-/* Create Foreign Keys */
-
-ALTER TABLE events
-  ADD FOREIGN KEY (calendarid)
-REFERENCES calendar (calendarid)
+ALTER TABLE `studentCourses`
+  ADD FOREIGN KEY (`studentid`)
+REFERENCES students (studentid)
   ON UPDATE RESTRICT;
 
-
-ALTER TABLE userevents
-  ADD FOREIGN KEY (calendarid)
-REFERENCES calendar (calendarid)
+ALTER TABLE `studentCourses`
+  ADD FOREIGN KEY (`courseid`)
+REFERENCES courses (courseid)
   ON UPDATE RESTRICT;
 
+INSERT INTO `dis`.`students`(`email`,`active`,`password`)
+VALUES ('admin@admin.dk', TRUE, '5F4DCC3B5AA765D61D8327DEB882CF99'),
+  ('christian@cbs.dk', TRUE, '57B7E5A0C19DB434327129979195DFDA'),
+  ('mathias@cbs.dk', TRUE, '57B7E5A0C19DB43927129979195DFDA'),
+  ('morten@cbs.dk', TRUE, '57B7E5A0DCD9DB434327129979195DFDA')
+;
 
-ALTER TABLE notes
-  ADD FOREIGN KEY (eventid)
-REFERENCES events (eventid)
-  ON UPDATE RESTRICT;
+INSERT INTO `dis`.`courses`(`name`)
+VALUES ('Distribuerede Systemer'),
+  ('VØS 3'),
+  ('Organisationsteori'),
+  ('Makroøkonomi'),
+  ('Projektledelse'),
+  ('Big data')
+;
+
+INSERT INTO `dis`.`studentCourses`(`studentid`, `courseid`)
+VALUES (4, 4),
+  (4, 2),
+  (4, 3),
+  (2, 5),
+  (2, 4),
+  (2, 2),
+  (3, 2),
+  (3, 4),
+  (3, 3)
+;
+
+/*
+SELECT `students`.`email`, `courses`.`name` FROM `students`, `courses`
+WHERE `courses`.`courseid`=1;
+
+SELECT * FROM studentCourses sc
+  INNER JOIN students s ON s.studentid = sc.studentid
+  INNER JOIN courses c ON c.courseid = sc.courseid
+  */
 
 
-ALTER TABLE events
-  ADD FOREIGN KEY (location)
-REFERENCES locationdata (locationdataid)
-  ON UPDATE RESTRICT;
-
-
-ALTER TABLE events
-  ADD FOREIGN KEY (createdby)
-REFERENCES users (userid)
-  ON UPDATE RESTRICT;
-
-
-ALTER TABLE roles
-  ADD FOREIGN KEY (userid)
-REFERENCES users (userid)
-  ON UPDATE RESTRICT;
-
-
-ALTER TABLE userevents
-  ADD FOREIGN KEY (userid)
-REFERENCES users (userid)
-  ON UPDATE RESTRICT;
-
-
-ALTER TABLE notes
-  ADD FOREIGN KEY (createdby)
-REFERENCES users (userid)
-  ON UPDATE RESTRICT;
