@@ -1,19 +1,10 @@
-## 7. Øvelsestime - Development setup
-Hackathon er lige ved at være om hjørnet, og i dag skal vi kigge på hvordan I kan få et godt udviklingsmiljø
-op og køre, inden I går amok i koden.
-
-Vi ser ofte at I alle sidder og udvikler på den samme database, hvilket kan ende i masse unødvendige konflikter.
-
-Vi anbefaler derfor at I hver har jeres egen udviklingsdatabase lokalt på jeres computer. I skal blot sørge
-for at I alle i gruppen har denne samme tabel-struktur, for at kunne arbejde sammen på projektet. Netop
-dette skal vi kigge på hvordan man gør i dag!
+## Øvelsestime - MySQL og databaser
 
 ### 1. Opgave - Hent dette repository
 1. Åbn din terminal og naviger hen til mappen hvor du ønsker dette projekt skal ligge (HINT: `cd` bruges til at skifte mappe)
-2. `git clone https://github.com/Distribuerede-Systemer-2017/db-utility.git`
-3. Åbn IntelliJ, lav et nyt projekt og placer projektet oven i dette repository
-4. Højreklik på `pom.xml` og tryk "Add as Maven Project".
-5. Du er færdig!
+2. Clone dette repository
+3. Åbn IntelliJ  og importer projectet. Vælg `import project from existing model` og vælg `maven`
+4. OBS: Hvis klassen `ResetDatabase` ikke kan køres, gå til `file` -> `project structure` -> `modules`. Klik på mappen `src` og marker den, og tryk `Sources`. Herefter OK, og du bør kunne køre filen.  
 
 ### 2. Opgave - Kør projektet
 
@@ -56,3 +47,9 @@ vil have default indhold hver gang scriptet køres.
 Scriptet er lavet således at det sletter, opretter og kører `sql.sql` filen hver gang programmet køres. Du kan derfor
 prøve at smide en masse indhold i databasen og så køre scriptet igen. Din database skulle nu gerne være rullet tilbage
 som den så ud da du begyndte.
+
+### 5. Forskellige SQL-queries
+1. List alle courses. (Brug SELECT)
+2. Prøv at tilføj en ny student. I kan få inspiration i `sql.sql` filen, hvor i kan se, hvordan `INSERT` kommandoen fungere.
+3. Assign den nye studerende til et specifict course 
+4. (SVÆR) List alle studerende som er assigned til faget Distribuerede Systemer. (Hint: I skal bruge en `INNER JOIN` kommando, som finder ud af, hvad to databaser har tilfældes ud fra nogle fælles felter (typisk bruger man foreign keys). I bunden af `sql.sql` står der en specific query. Denne kan bruges, hvis i tilføjer en betingelse. 
