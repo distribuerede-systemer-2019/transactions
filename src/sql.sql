@@ -41,7 +41,9 @@ INSERT INTO `dis`.`students`(`email`,`active`,`password`)
 VALUES ('admin@admin.dk', TRUE, '5F4DCC3B5AA765D61D8327DEB882CF99'),
   ('christian@cbs.dk', TRUE, '57B7E5A0C19DB434327129979195DFDA'),
   ('mathias@cbs.dk', TRUE, '57B7E5A0C19DB43927129979195DFDA'),
-  ('morten@cbs.dk', TRUE, '57B7E5A0DCD9DB434327129979195DFDA')
+  ('morten@cbs.dk', TRUE, '57B7E5A0DCD9DB434327129979195DFDA'),
+  ('hejjeghardis@cbs.dk', TRUE, '543B7E5A0DCD9DB434327129979195DFDA'),
+  ('hejjegogsåhardis@cbs.dk', TRUE, '543B7E5A0DCD9DB434327129979195DFDA')
 ;
 
 INSERT INTO `dis`.`courses`(`name`)
@@ -62,7 +64,9 @@ VALUES (4, 4),
   (2, 2),
   (3, 2),
   (3, 4),
-  (3, 3)
+  (3, 3),
+  (5, 1),
+  (6, 1)
 ;
 
 /*
