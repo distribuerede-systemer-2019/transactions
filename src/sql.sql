@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS calendar
   calendarid    INT          NOT NULL AUTO_INCREMENT,
   name          VARCHAR(255) NOT NULL,
   active        TINYINT,
-  createdBy     VARCHAR(255) NOT NULL,
+  createdby     VARCHAR(255) NOT NULL,
   -- 1 = public
   -- 2 = private
   privatePublic TINYINT      NOT NULL
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS notes
 (
   noteid    INT          NOT NULL AUTO_INCREMENT,
   eventid   INT          NOT NULL,
-  createdBy INT          NOT NULL,
+  createdby INT          NOT NULL,
   text      TEXT,
   dateTime  DATETIME     NOT NULL,
   active    BIT,
@@ -147,6 +147,6 @@ REFERENCES users (userid)
 
 
 ALTER TABLE notes
-  ADD FOREIGN KEY (createdBy)
+  ADD FOREIGN KEY (createdby)
 REFERENCES users (userid)
   ON UPDATE RESTRICT;
