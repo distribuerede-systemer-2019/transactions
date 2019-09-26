@@ -40,7 +40,7 @@ public class ResetDatabase {
 
     private static void executeSql(String sqlFilePath) {
         try (InputStreamReader file = new InputStreamReader(new FileInputStream(sqlFilePath))) {
-            ScriptRunner runner = new ScriptRunner(getConnection(true));
+            ScriptRunner runner = new ScriptRunner(getConnection(false));
             runner.runScript(file);
             runner.closeConnection();
             file.close();

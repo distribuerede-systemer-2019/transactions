@@ -40,7 +40,7 @@ kan køre.
 5. Opret og navngiv nu følgende variable og indsæt de værdier som passer til dit system: 
 ```
 DATABASE_HOST (default er localhost)
-DATABASE_NAME (her vælger du)
+DATABASE_NAME (her vælger du "dis")
 DATABASE_PORT (default er 3306)
 DATABASE_USER
 DATABASE_PASSWORD
