@@ -48,7 +48,10 @@ Scriptet er lavet således at det sletter, opretter og kører `sql.sql` filen hv
 prøve at smide en masse indhold i databasen og så køre scriptet igen. Din database skulle nu gerne være rullet tilbage
 som den så ud da du begyndte.
 
-### 5. Forskellige SQL-queries
+### 5. Opgave - databasediagram
+Tegn databasediagrammet. Hvilke tabeller er der, hvilke felter indeholder de, hvordan hænger de sammen (primary keys og foreign keys, er de én til én eller én til mange eller noget tredje?) 
+
+### 6. Forskellige SQL-queries
 1. List alle courses. (Brug SELECT)
 2. Prøv at tilføj en ny student. I kan få inspiration i `sql.sql` filen, hvor i kan se, hvordan `INSERT` kommandoen fungere.
 3. Assign den nye studerende til et specifict course 
