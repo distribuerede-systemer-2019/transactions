@@ -84,11 +84,6 @@ public class ResetDatabase {
             PreparedStatement psInsert = dbCon.prepareStatement(SQL_INSERT);
             PreparedStatement psUpdate = dbCon.prepareStatement(SQL_UPDATE);
 
-            //In exercise, all code related to transaction will not be shown.
-            //Disable auto commit (per default 'true')
-
-            dbCon.setAutoCommit(false);
-
             psInsert.setString(1, "Fundamentals of Corporate Finance");
             psInsert.setBigDecimal(2, new BigDecimal(100));
             psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
@@ -100,16 +95,10 @@ public class ResetDatabase {
             psInsert.execute();
 
             //This block throws the exception.
-            psUpdate.setBigDecimal(1, new BigDecimal(999.99));
-            psUpdate.setString(2, "The Great Book of IT Project Management");
+            psUpdate.setBigDecimal(2, new BigDecimal(999.99));
+            psUpdate.setString(2, "Fundamentals of Corporate Finance");
             psUpdate.execute();
 
-
-            //End transaction and commit changes.
-            dbCon.commit();
-
-            //Enable auto commit again.
-            dbCon.setAutoCommit(true);
         }
         catch (SQLException e){
             try {
@@ -144,18 +133,6 @@ public class ResetDatabase {
     private static final String SQL_INSERT = "INSERT INTO books (name, price, created_date) VALUES (?,?,?)";
 
     private static final String SQL_UPDATE = "UPDATE books SET price=? WHERE name=?";
-
-    // Testing elements for SQL database
-    private static final String SQL_TABLE_CREATE = "CREATE TABLE employee"
-            + "("
-            + " id serial,"
-            + " name varchar(100) NOT NULL,"
-            + " price numeric(15, 2) NOT NULL,"
-            + " created_date TIMESTAMP NOT NULL,"
-            + " PRIMARY KEY (ID)"
-            + ")";
-    // <//>
-    private static final String SQL_TABLE_DROP = "DROP TABLE EMPLOYEE";
 
 }
 
