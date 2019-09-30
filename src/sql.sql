@@ -45,15 +45,15 @@ CREATE TABLE IF NOT EXISTS books
  PRIMARY KEY (id)
 );
 
-ALTER TABLE `studentCourses`
-  ADD FOREIGN KEY (`studentid`)
-REFERENCES students (studentid)
-  ON UPDATE RESTRICT;
-
-ALTER TABLE `studentCourses`
-  ADD FOREIGN KEY (`courseid`)
-REFERENCES courses (courseid)
-  ON UPDATE RESTRICT;
+-- ALTER TABLE `studentCourses`
+--   ADD FOREIGN KEY (`studentid`)
+-- REFERENCES students (studentid)
+--   ON UPDATE RESTRICT;
+--
+-- ALTER TABLE `studentCourses`
+--   ADD FOREIGN KEY (`courseid`)
+-- REFERENCES courses (courseid)
+--   ON UPDATE RESTRICT;
 
 INSERT INTO `dis`.`students`(`email`,`active`,`password`)
 VALUES ('admin@admin.dk', TRUE, '5F4DCC3B5AA765D61D8327DEB882CF99'),
