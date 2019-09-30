@@ -27,3 +27,4 @@ Det viser sig at der er sket en fejl og Lars slet ikke er tilmeldt noget kursus 
 **Opgave 3.3** 
 
 Lars burde faktisk være tilmeldt HA(psyk.). Sørg for at tilmeld Lars til "Personlighedspsykologi" så det står i jeres SQL-database.
+
