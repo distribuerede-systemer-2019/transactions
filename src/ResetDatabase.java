@@ -101,7 +101,7 @@ public class ResetDatabase {
 
             //This block throws the exception.
             psUpdate.setBigDecimal(1, new BigDecimal(999.99));
-            psUpdate.setString(2, "The Great Book of IT Project Management");
+            psUpdate.setString(2, "Fundamentals of Corporate Finance");
             psUpdate.execute();
 
 
@@ -144,18 +144,6 @@ public class ResetDatabase {
     private static final String SQL_INSERT = "INSERT INTO books (name, price, created_date) VALUES (?,?,?)";
 
     private static final String SQL_UPDATE = "UPDATE books SET price=? WHERE name=?";
-
-    // Testing elements for SQL database
-    private static final String SQL_TABLE_CREATE = "CREATE TABLE employee"
-            + "("
-            + " id serial,"
-            + " name varchar(100) NOT NULL,"
-            + " price numeric(15, 2) NOT NULL,"
-            + " created_date TIMESTAMP NOT NULL,"
-            + " PRIMARY KEY (ID)"
-            + ")";
-    // <//>
-    private static final String SQL_TABLE_DROP = "DROP TABLE EMPLOYEE";
 
 }
 
