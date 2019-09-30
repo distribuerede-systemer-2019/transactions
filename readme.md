@@ -3,4 +3,5 @@ I dag handler øvelsen om transaction. De to opgaver indeholder kode baseret på
 OPGAVE 1. 
 
 1.1
+
 Start med at køre koden. Hvad sker der i jeres database?
