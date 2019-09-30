@@ -73,54 +73,6 @@ public class ResetDatabase {
         }
     }
 
-
-//    // Exercise with transaction
-//    private static void insertBooks() {
-//        try {
-//            if (dbCon == null) {
-//                dbCon = getConnection(true);
-//            }
-//
-//            PreparedStatement psInsert = dbCon.prepareStatement(SQL_INSERT);
-//            PreparedStatement psUpdate = dbCon.prepareStatement(SQL_UPDATE);
-//
-//            //In exercise, all code related to transaction will not be shown.
-//            //Disable auto commit (per default 'true')
-//
-//            dbCon.setAutoCommit(false);
-//
-//            psInsert.setString(1, "Fundamentals of Corporate Finance");
-//            psInsert.setBigDecimal(2, new BigDecimal(100));
-//            psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-//            psInsert.execute();
-//
-//            psInsert.setString(1, "Distributed System");
-//            psInsert.setBigDecimal(2, new BigDecimal(200));
-//            psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-//            psInsert.execute();
-//
-//            //This block throws the exception.
-//            psUpdate.setBigDecimal(1, new BigDecimal(999.99));
-//            psUpdate.setString(2, "Fundamentals of Corporate Finance");
-//            psUpdate.execute();
-//
-//
-//            //End transaction and commit changes.
-//            dbCon.commit();
-//
-//            //Enable auto commit again.
-//            dbCon.setAutoCommit(true);
-//        }
-//        catch (SQLException e){
-//            try {
-//                System.out.println("rollback");
-//                dbCon.rollback();
-//            } catch (SQLException x) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
     private static void assignCourse() {
         try {
             if (dbCon == null) {
@@ -131,10 +83,7 @@ public class ResetDatabase {
             PreparedStatement psInsertStudent = dbCon.prepareStatement(SQL_INSERT_STUDENT);
             PreparedStatement psInsertStudentCourse = dbCon.prepareStatement(SQL_INSERT_STUDENTCOURSE);
 
-            String studentName = "larslarsen@student.cbs.dk";
-
-            dbCon.setAutoCommit(false);
-            psInsertStudent.setString(1, studentName);
+            psInsertStudent.setString(1, "larslarsen@student.cbs.dk");
             psInsertStudent.setBoolean(2, true);
             psInsertStudent.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
             psInsertStudent.setString(4, "1234abcd");
@@ -147,19 +96,9 @@ public class ResetDatabase {
             psInsertCourse.setString(1, null);
             psInsertCourse.execute();
 
-            // If exercises where made correctly last time, 7 should be the student ID of larslarsen@student.cbs.dk
-            // and 7 is the course ID
-
-            dbCon.commit();
-            dbCon.setAutoCommit(true);
-
 
         } catch (SQLException e) {
-            try {
-                dbCon.rollback();
-            } catch (SQLException x) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
     }
 
@@ -184,11 +123,12 @@ public class ResetDatabase {
         System.out.println("Sql script done!");
     }
 
-    private static final String SQL_INSERT_COURSE = "INSERT INTO courses (name) VALUES (?)";
 
-    private static final String SQL_INSERT_STUDENT = "INSERT INTO students (email, active, created, password) VALUES (?, ?, ?, ?)";
-
-    private static final String SQL_INSERT_STUDENTCOURSE = "INSERT INTO studentCourses (courseid, studentid) VALUES (?, ?)";
+//    private static final String SQL_INSERT_COURSE = "INSERT INTO courses (name) VALUES (?)";
+//
+//    private static final String SQL_INSERT_STUDENT = "INSERT INTO students (email, active, created, password) VALUES (?, ?, ?, ?)";
+//
+//    private static final String SQL_INSERT_STUDENTCOURSE = "INSERT INTO studentCourses (courseid, studentid) VALUES (?, ?)";
 
 }
 
