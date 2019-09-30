@@ -84,6 +84,7 @@ public class ResetDatabase {
             PreparedStatement psInsert = dbCon.prepareStatement(SQL_INSERT);
             PreparedStatement psUpdate = dbCon.prepareStatement(SQL_UPDATE);
 
+            //Transaction block
             psInsert.setString(1, "Fundamentals of Corporate Finance");
             psInsert.setBigDecimal(2, new BigDecimal(100));
             psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
@@ -101,12 +102,7 @@ public class ResetDatabase {
 
         }
         catch (SQLException e){
-            try {
-                System.out.println("rollback");
-                dbCon.rollback();
-            } catch (SQLException x) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
     }
 
