@@ -8,6 +8,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 
 public class ResetDatabase {
+    private static Connection dbCon;
 
     private static String getWorkingDir() {
         return System.getProperty("user.dir");
@@ -76,14 +77,17 @@ public class ResetDatabase {
     //Exercise with transaction
     private static void insertBooks() {
         try {
+            if (dbCon == null) {
+                dbCon = getConnection(true);
+            }
 
-            PreparedStatement psInsert = getConnection(true).prepareStatement(SQL_INSERT);
-            PreparedStatement psUpdate = getConnection(true).prepareStatement(SQL_UPDATE);
+            PreparedStatement psInsert = dbCon.prepareStatement(SQL_INSERT);
+            PreparedStatement psUpdate = dbCon.prepareStatement(SQL_UPDATE);
 
             //In exercise, all code related to transaction will not be shown.
             //Disable auto commit (per default 'true')
 
-            getConnection(true).setAutoCommit(false);
+            dbCon.setAutoCommit(false);
 
             psInsert.setString(1, "Fundamentals of Corporate Finance");
             psInsert.setBigDecimal(2, new BigDecimal(100));
@@ -102,14 +106,15 @@ public class ResetDatabase {
 
 
             //End transaction and commit changes.
-            getConnection(true).commit();
+            dbCon.commit();
 
             //Enable auto commit again.
-            getConnection(true).setAutoCommit(true);
+            dbCon.setAutoCommit(true);
         }
         catch (SQLException e){
             try {
-                getConnection(true).rollback();
+                System.out.println("rollback");
+                dbCon.rollback();
             } catch (SQLException x) {
                 e.printStackTrace();
             }
