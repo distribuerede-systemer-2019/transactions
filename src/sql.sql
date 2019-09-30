@@ -27,6 +27,24 @@ CREATE TABLE IF NOT EXISTS studentCourses
   PRIMARY KEY(studentcoursesid)
 );
 
+CREATE TABLE IF NOT EXISTS books
+(
+  bookid INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(40) NOT NULL,
+  PRIMARY KEY (bookid)
+);
+
+DROP TABLE IF EXISTS books;
+
+CREATE TABLE IF NOT EXISTS books
+(
+ id INT NOT NULL AUTO_INCREMENT,
+ name VARCHAR(100) NOT NULL,
+ price numeric(15, 2) NOT NULL,
+ created_date TIMESTAMP NOT NULL,
+ PRIMARY KEY (id)
+);
+
 ALTER TABLE `studentCourses`
   ADD FOREIGN KEY (`studentid`)
 REFERENCES students (studentid)
@@ -68,14 +86,5 @@ VALUES (4, 4),
   (5, 1),
   (6, 1)
 ;
-
-/*
-SELECT `students`.`email`, `courses`.`name` FROM `students`, `courses`
-WHERE `courses`.`courseid`=1;
-
-SELECT * FROM studentCourses sc
-  INNER JOIN students s ON s.studentid = sc.studentid
-  INNER JOIN courses c ON c.courseid = sc.courseid
-  */
 
 

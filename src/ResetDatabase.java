@@ -3,10 +3,9 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.sql.*;
+import java.time.LocalDateTime;
 
 public class ResetDatabase {
 
@@ -31,7 +30,11 @@ public class ResetDatabase {
                                 + System.getenv("DATABASE_PORT") + "/?useSSL=false&serverTimezone=GMT",
                         System.getenv("DATABASE_USER"),
                         System.getenv("DATABASE_PASSWORD"));
+
+
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,6 +72,50 @@ public class ResetDatabase {
         }
     }
 
+
+    //Exercise with transaction
+    private static void insertBooks() {
+        try {
+
+            PreparedStatement psInsert = getConnection(true).prepareStatement(SQL_INSERT);
+            PreparedStatement psUpdate = getConnection(true).prepareStatement(SQL_UPDATE);
+
+            //In exercise, all code related to transaction will not be shown.
+            //Disable auto commit (per default 'true')
+
+            getConnection(true).setAutoCommit(false);
+
+            psInsert.setString(1, "Fundamentals of Corporate Finance");
+            psInsert.setBigDecimal(2, new BigDecimal(100));
+            psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            psInsert.execute();
+
+            psInsert.setString(1, "Distributed System");
+            psInsert.setBigDecimal(2, new BigDecimal(200));
+            psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            psInsert.execute();
+
+
+            psUpdate.setBigDecimal(2, new BigDecimal(999.99));
+            psUpdate.setString(2, "mkyong");
+            psUpdate.execute();
+
+
+            //End transaction and commit changes.
+            getConnection(true).commit();
+
+            //Enable auto commit again.
+            getConnection(true).setAutoCommit(true);
+        }
+        catch (SQLException e){
+            try {
+                getConnection(true).rollback();
+            } catch (SQLException x) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         //Wipe database
@@ -79,9 +126,32 @@ public class ResetDatabase {
         createDatabase();
         System.out.println("Create new database ...");
 
+
         //Run script
         String sqlFilePath = getWorkingDir() + "/src/sql.sql";
         executeSql(sqlFilePath);
+
+
+        insertBooks();
         System.out.println("Sql script done!");
     }
+
+    private static final String SQL_INSERT = "INSERT INTO books (name, price, created_date) VALUES (?,?,?)";
+
+    private static final String SQL_UPDATE = "UPDATE books SET price=? WHERE name=?";
+
+    // Testing elements for SQL database
+    private static final String SQL_TABLE_CREATE = "CREATE TABLE employee"
+            + "("
+            + " id serial,"
+            + " name varchar(100) NOT NULL,"
+            + " price numeric(15, 2) NOT NULL,"
+            + " created_date TIMESTAMP NOT NULL,"
+            + " PRIMARY KEY (ID)"
+            + ")";
+    // <//>
+    private static final String SQL_TABLE_DROP = "DROP TABLE EMPLOYEE";
+
 }
+
+
