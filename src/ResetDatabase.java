@@ -95,9 +95,9 @@ public class ResetDatabase {
             psInsert.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
             psInsert.execute();
 
-
-            psUpdate.setBigDecimal(2, new BigDecimal(999.99));
-            psUpdate.setString(2, "mkyong");
+            //This block throws the exception.
+            psUpdate.setBigDecimal(1, new BigDecimal(999.99));
+            psUpdate.setString(2, "The Great Book of IT Project Management");
             psUpdate.execute();
 
 
