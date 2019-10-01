@@ -15,6 +15,7 @@ Academic Books ønsker ikke at sætte en bog til salg til en forkert pris. Derfo
 Prøv nu at fikse Parameter-fejlen. Dette burde giver den rigtige pris på "Fundamentals of Corporate Finance" på 999
 
 **OPGAVE 2.**
+Skift branch til `transaction2`
 
 **Opgave 2.1**
 
